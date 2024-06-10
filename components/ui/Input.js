@@ -1,10 +1,10 @@
 import React from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
-import { Colors } from "../constants/styles";
+import { Colors } from "../../constants/styles";
 
 const Input = ({
   label,
-  keyBoardType,
+  keyboardType,
   secure,
   onUpdateValue,
   value,
@@ -12,11 +12,13 @@ const Input = ({
 }) => {
   return (
     <View style={styles.inputContainer}>
-      <Text style={isInvalid && styles.labelInvalid}>{label}</Text>
+      <Text style={[styles.label, isInvalid && styles.labelInvalid]}>
+        {label}
+      </Text>
       <TextInput
-        style={[styles.input, isInvalid && styles.inputInvalid]} // 스타일 적용이 두 개 이상이면 배여롤 묶어서 전달.
+        style={[styles.input, isInvalid && styles.inputInvalid]} // 스타일 적용이 두개 이상이면 배열로 묶어서 전달.
         autoCapitalize='none'
-        keyboardType={keyBoardType}
+        keyboardType={keyboardType}
         secureTextEntry={secure}
         onChangeText={onUpdateValue}
         value={value}
@@ -30,6 +32,10 @@ export default Input;
 const styles = StyleSheet.create({
   inputContainer: {
     marginVertical: 8,
+  },
+  label: {
+    color: "white",
+    marginBottom: 4,
   },
   labelInvalid: {
     color: Colors.error500,
